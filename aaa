@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="keyword" style="width: 100px;">キーワード</label>
+        <input type="text" class="form-control" name="keyword" id="keyword" value="{{ search_keyword }}">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="category" style="width: 100px;">カテゴリ</label>
+        <select class="form-control" name="category" id="category">
+          <option value=""></option>
+          <optgroup label="ニュース・一般">
+            {% for key, value in category_general.items %}
+            <option value="{{ key }}" {% if key == search_category %}{{ 'selected' }}{% endif %}>{{ value }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="スポーツ">
+            {% for key, value in category_sports.items %}
+            <option value="{{ key }}" {% if key == search_category %}{{ 'selected' }}{% endif %}>{{ value }}</option>
+            {% endfor %}
+          </optgroup>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="article_status" style="width: 100px;">ステータス</label>
+        <select class="form-control" name="status" id="article_status">
+          <option value=""></option>
+          {% for key, value in statuses.items %}
+          <option value="{{ key }}" {% if key == search_status %}{{ 'selected' }}{% endif %}>{{ value }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label style="width: 100px;">配信日</label>
+        <div class="row">
+          <div class="col-sm-6">
+            <input type="date" class="form-control" name="delivery_date_from" id="delivery_date_from" value="{{ search_delivery_date_from }}">
+          </div>
+          <div class="col-sm-6">
+            <input type="date" class="form-control" name="delivery_date_to" id="delivery_date_to" value="{{ search_delivery_date_to }}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>キーワード検索方法:</label>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" id="AND" name="keyword_method" value="AND" {% if search_keyword_method == 'AND' or search_keyword_method == '' %} {{ 'checked' }} {% endif %}>
+          <label class="form-check-label" for="AND">AND</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" id="OR" name="keyword_method" value="OR" {% if search_keyword_method == 'OR' %} {{ 'checked' }} {% endif %}>
+          <label class="form-check-label" for="OR">OR</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <button class="btn btn-primary" type="submit">検索</button>
+          </div>
+          <div class="col-sm-6">
+            <input type="hidden" name="proc" value="1">
+            <button class="btn btn-primary" type="button" id="clear_btn">クリア</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
